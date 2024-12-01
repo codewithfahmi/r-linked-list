@@ -263,6 +263,17 @@ linked_list <- function() { # nolint: cyclocomp_linter.
     env$head <- sorted_head
   }
 
+  env$search <- function(keyword) {
+    current_node <- env$head
+    result <- linked_list()
+    while (!is.null(current_node)) {
+      if (grepl(keyword, current_node$item$to_string())) {
+        result$append(current_node$item)
+      }
+      current_node <- current_node$next_node
+    }
+    result
+  }
 
   env
 }
@@ -275,5 +286,4 @@ ll <- linked_list()
 ll$append(mahasiswa("Fahmi", "Jepara", 21, "L", list("Makan", "Tidur"), 2.5))
 ll$append(mahasiswa("Budi", "Jakarta", "L", 20, list("Futsal", "Game"), 3.0))
 ll$append(mahasiswa("Alya", "Bandung", "P", 22, list("Membaca", "Renang"), 3.8))
-ll$selection_sort(compare_by_name)
-ll$display()
+ll$search("L")$display()
