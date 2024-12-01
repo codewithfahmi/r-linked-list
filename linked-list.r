@@ -173,23 +173,3 @@ linked_list <- function() { # nolint: cyclocomp_linter.
 
   env
 }
-
-ll <- linked_list()
-ll$prepend(
-  mahasiswa("fahmi", "jepara", "l", 24, list("makan", "tidur", "ngoding"), 2.4)
-)
-ll$prepend(
-  mahasiswa("siska", "jakarta", "p", 25, list("makan", "tidur", "ngoding"), 2.4)
-)
-ll$append(
-  mahasiswa("rudi", "bogor", "l", 19, list("makan", "tidur", "ngoding"), 2.4)
-)
-ll$insert(
-  mahasiswa("mail", "depok", "l", 30, list("makan", "tidur", "ngoding"), 2.4),
-  2
-)
-cat(ll$unshift()$to_string(), "\n")
-cat(ll$pop()$to_string(), "\n")
-cat(ll$unshift()$to_string(), "\n")
-cat(ll$pop()$to_string(), "\n")
-ll$display()

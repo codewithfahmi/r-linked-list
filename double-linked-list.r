@@ -13,14 +13,7 @@ mahasiswa <- function(
   env$hobbies <- hobbies
   env$gpa <- gpa
   env$to_string <- function() {
-    paste(
-      "name:", env$name,
-      "age:", env$age,
-      "gender:", env$gender,
-      "address:", env$address,
-      "hobbies:", toString(env$hobbies),
-      "gpa:", env$gpa
-    )
+    paste(env$name, env$age, env$gender, env$address, toString(env$hobbies), env$gpa)
   }
   env
 }
@@ -200,20 +193,3 @@ linked_list <- function() { # nolint: cyclocomp_linter.
 
   env
 }
-
-ll <- linked_list()
-ll$prepend(
-  mahasiswa("fahmi", "jepara", "l", 24, list("makan", "tidur", "ngoding"), 2.4)
-)
-ll$prepend(
-  mahasiswa("siska", "jakarta", "p", 25, list("makan", "tidur", "ngoding"), 2.4)
-)
-ll$append(
-  mahasiswa("rudi", "bogor", "l", 19, list("makan", "tidur", "ngoding"), 2.4)
-)
-ll$insert(
-  mahasiswa("mail", "depok", "l", 30, list("makan", "tidur", "ngoding"), 2.4),
-  3
-)
-
-ll$display()
