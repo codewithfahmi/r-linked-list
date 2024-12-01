@@ -277,13 +277,3 @@ linked_list <- function() { # nolint: cyclocomp_linter.
 
   env
 }
-
-compare_by_name <- function(a, b) {
-  return(a$name > b$name)
-}
-
-ll <- linked_list()
-ll$append(mahasiswa("Fahmi", "Jepara", 21, "L", list("Makan", "Tidur"), 2.5))
-ll$append(mahasiswa("Budi", "Jakarta", "L", 20, list("Futsal", "Game"), 3.0))
-ll$append(mahasiswa("Alya", "Bandung", "P", 22, list("Membaca", "Renang"), 3.8))
-ll$search("L")$display()
