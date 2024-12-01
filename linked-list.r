@@ -190,20 +190,49 @@ linked_list <- function() { # nolint: cyclocomp_linter.
           next_node$item <- temp
           sorted <- FALSE
         }
-
         current_node <- current_node$next_node
       }
     }
   }
 
+  env$insertion_sort <- function(comparator) {
+    if (is.null(env$head) || is.null(env$head$next_node)) {
+      return()
+    }
+
+    sorted_head <- NULL
+    current_node <- env$head
+
+    while (!is.null(current_node)) {
+      next_node <- current_node$next_node
+
+      if (is.null(sorted_head) || !comparator(sorted_head$item, current_node$item)) { # nolint: line_length_linter.
+        current_node$next_node <- sorted_head
+        sorted_head <- current_node
+      } else {
+        sorted_node <- sorted_head
+        while (!is.null(sorted_node$next_node) && comparator(sorted_node$next_node$item, current_node$item)) { # nolint: line_length_linter.
+          sorted_node <- sorted_node$next_node
+        }
+        current_node$next_node <- sorted_node$next_node
+        sorted_node$next_node <- current_node
+      }
+      current_node <- next_node
+    }
+    env$head <- sorted_head
+  }
+
+
   env
+}
+
+compare_by_name <- function(a, b) {
+  return(a$name < b$name)
 }
 
 ll <- linked_list()
 ll$append(mahasiswa("Fahmi", "Jepara", 21, "L", list("Makan", "Tidur"), 2.5))
 ll$append(mahasiswa("Budi", "Jakarta", "L", 20, list("Futsal", "Game"), 3.0))
 ll$append(mahasiswa("Alya", "Bandung", "P", 22, list("Membaca", "Renang"), 3.8))
-ll$bubble_sort(function(a, b) {
-  return(a$name > b$name)
-})
+ll$insertion_sort(compare_by_name)
 ll$display()
