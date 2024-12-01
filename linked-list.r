@@ -14,12 +14,13 @@ mahasiswa <- function(
   env$gpa <- gpa
   env$to_string <- function() {
     paste(
-      "name:", env$name,
-      "age:", env$age,
-      "gender:", env$gender,
-      "address:", env$address,
-      "hobbies:", toString(env$hobbies),
-      "gpa:", env$gpa
+      paste("name:", env$name),
+      paste("age:", env$age),
+      paste("gender:", env$gender),
+      paste("address:", env$address),
+      paste("hobbies:", toString(env$hobbies)),
+      paste("gpa:", env$gpa),
+      sep = ", "
     )
   }
   env
@@ -171,5 +172,38 @@ linked_list <- function() { # nolint: cyclocomp_linter.
     }
   }
 
+  env$bubble_sort <- function(comparator) {
+    if (is.null(env$head) || is.null(env$head$next_node)) {
+      return()
+    }
+
+    sorted <- FALSE
+    while (!sorted) {
+      sorted <- TRUE
+      current_node <- env$head
+
+      while (!is.null(current_node$next_node)) {
+        next_node <- current_node$next_node
+        if (comparator(current_node$item, next_node$item)) {
+          temp <- current_node$item
+          current_node$item <- next_node$item
+          next_node$item <- temp
+          sorted <- FALSE
+        }
+
+        current_node <- current_node$next_node
+      }
+    }
+  }
+
   env
 }
+
+ll <- linked_list()
+ll$append(mahasiswa("Fahmi", "Jepara", 21, "L", list("Makan", "Tidur"), 2.5))
+ll$append(mahasiswa("Budi", "Jakarta", "L", 20, list("Futsal", "Game"), 3.0))
+ll$append(mahasiswa("Alya", "Bandung", "P", 22, list("Membaca", "Renang"), 3.8))
+ll$bubble_sort(function(a, b) {
+  return(a$name > b$name)
+})
+ll$display()
